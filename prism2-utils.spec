@@ -36,7 +36,7 @@ perl -pi -e 's|#LINUX_SRC|LINUX_SRC|g' config.in
 
 make auto_config
 
-# mandrake has the drivers in the kernel, so we don't want to build
+# Mandriva has the drivers in the kernel, so we don't want to build
 # them here, just the utils.
 
 sed -e 's/p80211 prism2//g' src/Makefile > m
@@ -56,7 +56,7 @@ perl -p -i -e 's|/usr/local/man|/usr/share/man||g' man/Makefile
 
 %build
 
-# use the headers from the mandrake kernel
+# use the headers from the Mandriva kernel
 CFLAGS=-I/usr/src/linux/3rdparty/prism25/include make all
 
 # make all
