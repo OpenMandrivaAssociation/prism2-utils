@@ -1,7 +1,7 @@
 %define name 	prism2-utils
 %define version 0.2.1
 %define pretag	pre26
-%define release %mkrel 0.%{pretag}.3
+%define release %mkrel 0.%{pretag}.4
 
 Summary: 	Utilities from the linux-wlan-ng project
 Name: 		%{name}
@@ -83,7 +83,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %doc CHANGES COPYING FAQ LICENSE README THANKS TODO
-%doc doc/
 %_mandir/man1/*
 /sbin/*
 %config(noreplace) %_initrddir/wlan
