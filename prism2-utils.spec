@@ -14,7 +14,7 @@ Patch1:		linux-wlan-ng-0.2.1-pre26-ignore-rpmfiles.patch
 License: 	MPL
 Group: 		System/Kernel and hardware
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: 	kernel-source
+BuildRequires: 	kernel-source-latest
 Provides:	linux-wlan-ng
 
 %description
