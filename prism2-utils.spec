@@ -1,7 +1,7 @@
 %define name 	prism2-utils
 %define version 0.2.1
 %define pretag	pre26
-%define release %mkrel 0.%{pretag}.4
+%define release %mkrel 0.%{pretag}.5
 
 Summary: 	Utilities from the linux-wlan-ng project
 Name: 		%{name}
