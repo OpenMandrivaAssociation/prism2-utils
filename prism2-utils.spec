@@ -1,21 +1,21 @@
 %define name 	prism2-utils
 %define version 0.2.1
 %define pretag	pre26
-%define release %mkrel 0.%{pretag}.5
 
 Summary: 	Utilities from the linux-wlan-ng project
 Name: 		%{name}
 Version: 	%{version}
-Release: 	%{release}
+Release: 	%mkrel 0.%{pretag}.5
 URL:		http://www.linux-wlan.com/linux-wlan/
 Source0: 	linux-wlan-ng-%{version}-%{pretag}.tar.bz2
 Patch0:		linux-wlan-ng-0.2.1pre21.I-Gate-11M.patch
 Patch1:		linux-wlan-ng-0.2.1-pre26-ignore-rpmfiles.patch
 License: 	MPL
 Group: 		System/Kernel and hardware
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: 	kernel-source-latest
+BuildRequires: 	kernel-devel
 Provides:	linux-wlan-ng
+BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Tools for configuring the prism2 drivers for wireless network
