@@ -1,13 +1,20 @@
 %define name 	prism2-utils
-%define version 0.2.1
-%define pretag	pre26
+%define version 0.2.8
+%define pretag	0
+%if %pretag
+%define release %mkrel 0.%{pretag}.5
+%define distname linux-wlan-ng-%{version}-%{pretag}
+%else
+%define release %mkrel 1
+%define distname linux-wlan-ng-%{version}
+%endif
 
 Summary: 	Utilities from the linux-wlan-ng project
 Name: 		%{name}
 Version: 	%{version}
-Release: 	%mkrel 0.%{pretag}.5
+Release: 	%{release}
 URL:		http://www.linux-wlan.com/linux-wlan/
-Source0: 	linux-wlan-ng-%{version}-%{pretag}.tar.bz2
+Source0: 	ftp://ftp.linux-wlan.org/pub/linux-wlan-ng/%{distname}.tar.bz2
 Patch0:		linux-wlan-ng-0.2.1pre21.I-Gate-11M.patch
 Patch1:		linux-wlan-ng-0.2.1-pre26-ignore-rpmfiles.patch
 License: 	MPL
@@ -22,7 +29,7 @@ Tools for configuring the prism2 drivers for wireless network
 cards using Intersil's Prism2/2.5/3 chipsets.
 
 %prep
-%setup -q -n linux-wlan-ng-%{version}-%{pretag}
+%setup -q -n %{distname}
 
 %patch0 -p1 -b .I-Gate-11M
 %patch1 -p1 -b .rpmfiles
