@@ -15,6 +15,7 @@ Version: 	%{version}
 Release: 	%{release}
 URL:		http://www.linux-wlan.com/linux-wlan/
 Source0: 	ftp://ftp.linux-wlan.org/pub/linux-wlan-ng/%{distname}.tar.bz2
+Patch0:		linux-wlan-ng-0.2.8-udev.patch
 Patch1:		linux-wlan-ng-0.2.8-rpmfiles.patch
 License: 	MPL
 Group: 		System/Kernel and hardware
@@ -29,6 +30,7 @@ cards using Intersil's Prism2/2.5/3 chipsets.
 
 %prep
 %setup -q -n %{distname}
+%patch0 -p1 -b .udev
 %patch1 -p1 -b .rpmfiles
 
 # sed config.in for PCMCIA=n and TARGET_ROOT_ON_HOST=installdir
