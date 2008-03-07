@@ -15,7 +15,7 @@ Version: 	%{version}
 Release: 	%{release}
 URL:		http://www.linux-wlan.com/linux-wlan/
 Source0: 	ftp://ftp.linux-wlan.org/pub/linux-wlan-ng/%{distname}.tar.bz2
-Patch1:		linux-wlan-ng-0.2.1-pre26-ignore-rpmfiles.patch
+Patch1:		linux-wlan-ng-0.2.8-rpmfiles.patch
 License: 	MPL
 Group: 		System/Kernel and hardware
 BuildRequires: 	kernel-source-latest
