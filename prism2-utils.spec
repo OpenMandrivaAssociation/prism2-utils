@@ -72,6 +72,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d -m755 $RPM_BUILD_ROOT/etc/hotplug
 TARGET_PCMCIA_DIR=$RPM_BUILD_ROOT/etc/pcmcia make install
 install -m 644 src/prism2/shared.prism2 $RPM_BUILD_ROOT/etc/wlan/
+install -d -m755 $RPM_BUILD_ROOT/etc/udev/rules.d
+install -m 644 etc/udev/rules.d/40-prism2.rules $RPM_BUILD_ROOT/etc/udev/rules.d
 
 # how did this get there?
 rm -f %buildroot/etc/shared
@@ -98,5 +100,4 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %_sysconfdir/wlan/wlan.conf
 %attr(755,root,root) %config(noreplace) %_sysconfdir/wlan/wlancfg-DEFAULT
 %attr(755,root,root) %config(noreplace) %_sysconfdir/hotplug/wlan.agent
-
-
+%config(noreplace) %{_sysconfdir}/udev/rules.d/40-prism2.rules
