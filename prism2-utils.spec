@@ -89,8 +89,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES COPYING FAQ LICENSE README THANKS TODO
 %_mandir/man1/*
 /sbin/*
-%config(noreplace) %_initrddir/wlan
-%config %_sysconfdir/wlan/shared
+%_initrddir/wlan
+%_sysconfdir/wlan/shared
 %config(noreplace) %_sysconfdir/pcmcia/wlan-ng
 %config(noreplace) %_sysconfdir/pcmcia/wlan-ng.conf
 %config(noreplace) %_sysconfdir/wlan/shared?*
