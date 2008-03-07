@@ -94,6 +94,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %_sysconfdir/pcmcia/wlan-ng
 %config(noreplace) %_sysconfdir/pcmcia/wlan-ng.conf
 %config(noreplace) %_sysconfdir/wlan/shared*
+%config(noreplace) %_sysconfdir/wlan/wlan-udev.sh
 %config(noreplace) %_sysconfdir/wlan/wlan.conf
 %attr(755,root,root) %config(noreplace) %_sysconfdir/wlan/wlancfg-DEFAULT
 %attr(755,root,root) %config(noreplace) %_sysconfdir/hotplug/wlan.agent
