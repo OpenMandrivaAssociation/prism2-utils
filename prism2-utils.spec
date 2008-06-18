@@ -5,7 +5,7 @@
 %define release %mkrel 0.%{pretag}.5
 %define distname linux-wlan-ng-%{version}-%{pretag}
 %else
-%define release %mkrel 1
+%define release %mkrel 2
 %define distname linux-wlan-ng-%{version}
 %endif
 
