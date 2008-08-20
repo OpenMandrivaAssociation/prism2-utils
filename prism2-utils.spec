@@ -5,7 +5,7 @@
 %define release %mkrel 0.%{pretag}.5
 %define distname linux-wlan-ng-%{version}-%{pretag}
 %else
-%define release %mkrel 2
+%define release %mkrel 3
 %define distname linux-wlan-ng-%{version}
 %endif
 
@@ -17,6 +17,7 @@ URL:		http://www.linux-wlan.com/linux-wlan/
 Source0: 	ftp://ftp.linux-wlan.org/pub/linux-wlan-ng/%{distname}.tar.bz2
 Patch0:		linux-wlan-ng-0.2.8-udev.patch
 Patch1:		linux-wlan-ng-0.2.8-rpmfiles.patch
+Patch2:		linux-wlan-ng-0.2.8-disable_kernel_driver_build.patch
 License: 	MPL
 Group: 		System/Kernel and hardware
 BuildRequires: 	kernel-source-latest
@@ -32,13 +33,12 @@ cards using Intersil's Prism2/2.5/3 chipsets.
 %setup -q -n %{distname}
 %patch0 -p1 -b .udev
 %patch1 -p1 -b .rpmfiles
+%patch2 -p1 -b .disable_kernel_driver_build
 
 # sed config.in for PCMCIA=n and TARGET_ROOT_ON_HOST=installdir
 sed -e 's%PRISM2_PCMCIA=y%PRISM2_PCMCIA=n%g' config.in |\
 sed -e s%TARGET_ROOT_ON_HOST=%TARGET_ROOT_ON_HOST=$RPM_BUILD_ROOT%g > x
 mv x config.in
-
-perl -pi -e 's|#LINUX_SRC|LINUX_SRC|g' config.in
 
 make auto_config
 
