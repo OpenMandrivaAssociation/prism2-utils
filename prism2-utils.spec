@@ -37,7 +37,7 @@ cards using Intersil's Prism2/2.5/3 chipsets.
 
 # sed config.in for PCMCIA=n and TARGET_ROOT_ON_HOST=installdir
 sed -e 's%PRISM2_PCMCIA=y%PRISM2_PCMCIA=n%g' config.in |\
-sed -e s%TARGET_ROOT_ON_HOST=%TARGET_ROOT_ON_HOST=$RPM_BUILD_ROOT%g > x
+sed -e s%TARGET_ROOT_ON_HOST=%TARGET_ROOT_ON_HOST=%{buildroot}%g > x
 mv x config.in
 
 make auto_config
@@ -68,13 +68,13 @@ CFLAGS=-I/usr/src/linux/3rdparty/prism25/include make all
 # make all
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 # have to specify TARGET_PCMCIA_DIR since we want the config
 # files even though we didn't build the driver.
-TARGET_PCMCIA_DIR=$RPM_BUILD_ROOT/etc/pcmcia make install
-install -m 644 src/prism2/shared.prism2 $RPM_BUILD_ROOT/etc/wlan/
-install -d -m755 $RPM_BUILD_ROOT/etc/udev/rules.d
-install -m 644 etc/udev/rules.d/40-prism2.rules $RPM_BUILD_ROOT/etc/udev/rules.d
+TARGET_PCMCIA_DIR=%{buildroot}/etc/pcmcia make install
+install -m 644 src/prism2/shared.prism2 %{buildroot}/etc/wlan/
+install -d -m755 %{buildroot}/etc/udev/rules.d
+install -m 644 etc/udev/rules.d/40-prism2.rules %{buildroot}/etc/udev/rules.d
 
 # how did this get there?
 rm -f %buildroot/etc/shared
@@ -85,7 +85,7 @@ rm -f %buildroot/etc/shared
 chkconfig --del wlan
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
