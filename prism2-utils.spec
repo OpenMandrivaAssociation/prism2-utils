@@ -37,7 +37,7 @@ cards using Intersil's Prism2/2.5/3 chipsets.
 
 # sed config.in for PCMCIA=n and TARGET_ROOT_ON_HOST=installdir
 sed -e 's%PRISM2_PCMCIA=y%PRISM2_PCMCIA=n%g' config.in |\
-sed -e s%TARGET_ROOT_ON_HOST=%TARGET_ROOT_ON_HOST=%{buildroot}%g > x
+sed -e s%TARGET_ROOT_ON_HOST=%TARGET_ROOT_ON_HOST=$RPM_BUILD_ROOT%g > x
 mv x config.in
 
 make auto_config
@@ -68,13 +68,13 @@ CFLAGS=-I/usr/src/linux/3rdparty/prism25/include make all
 # make all
 
 %install
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 # have to specify TARGET_PCMCIA_DIR since we want the config
 # files even though we didn't build the driver.
-TARGET_PCMCIA_DIR=%{buildroot}/etc/pcmcia make install
-install -m 644 src/prism2/shared.prism2 %{buildroot}/etc/wlan/
-install -d -m755 %{buildroot}/etc/udev/rules.d
-install -m 644 etc/udev/rules.d/40-prism2.rules %{buildroot}/etc/udev/rules.d
+TARGET_PCMCIA_DIR=$RPM_BUILD_ROOT/etc/pcmcia make install
+install -m 644 src/prism2/shared.prism2 $RPM_BUILD_ROOT/etc/wlan/
+install -d -m755 $RPM_BUILD_ROOT/etc/udev/rules.d
+install -m 644 etc/udev/rules.d/40-prism2.rules $RPM_BUILD_ROOT/etc/udev/rules.d
 
 # how did this get there?
 rm -f %buildroot/etc/shared
@@ -85,7 +85,7 @@ rm -f %buildroot/etc/shared
 chkconfig --del wlan
 
 %clean
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
@@ -101,3 +101,87 @@ rm -rf %{buildroot}
 %config(noreplace) %_sysconfdir/wlan/wlan.conf
 %attr(755,root,root) %config(noreplace) %_sysconfdir/wlan/wlancfg-DEFAULT
 %config(noreplace) %{_sysconfdir}/udev/rules.d/40-prism2.rules
+
+
+%changelog
+* Thu May 05 2011 Oden Eriksson <oeriksson@mandriva.com> 0.2.8-6mdv2011.0
++ Revision: 667846
+- mass rebuild
+
+* Fri Dec 03 2010 Oden Eriksson <oeriksson@mandriva.com> 0.2.8-5mdv2011.0
++ Revision: 607210
+- rebuild
+
+* Wed Feb 03 2010 Frederic Crozat <fcrozat@mandriva.com> 0.2.8-4mdv2010.1
++ Revision: 500305
+- Fix obsolete syntax in udev rules
+
+* Thu Sep 03 2009 Christophe Fergeau <cfergeau@mandriva.com> 0.2.8-3mdv2010.0
++ Revision: 426781
+- rebuild
+
+* Sat Mar 07 2009 Antoine Ginies <aginies@mandriva.com> 0.2.8-3mdv2009.1
++ Revision: 351611
+- rebuild
+
+* Wed Aug 20 2008 Herton Ronaldo Krzesinski <herton@mandriva.com.br> 0.2.8-3mdv2009.0
++ Revision: 274399
+- Fix build with not prepared kernel-source package.
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+* Fri Mar 07 2008 Olivier Blin <oblin@mandriva.com> 0.2.8-1mdv2008.1
++ Revision: 181235
+- always start interfaces in initscript, and do not start them at boot with udev rules (could hang)
+- do not install unused hotplug agent
+- package udev rule
+- do not mark /etc/wlan/shared and initscript as config files
+- do not package /etc/wlan/shared twice
+- package wlan-udev.sh
+- rediff rpmfiles patch
+- drop I-Gate-11M patch (merged upstream)
+- 0.2.8 (really commit tarballs)
+- 0.2.8
+- restore BuildRoot
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - fix build deps (kernel-devel)
+    - rebuild
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Thu Sep 20 2007 Olivier Blin <oblin@mandriva.com> 0.2.1-0.pre26.4mdv2008.0
++ Revision: 91491
+- do not package devel doc
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - s/Mandrake/Mandriva/
+
+
+* Sat Mar 17 2007 Olivier Blin <oblin@mandriva.com> 0.2.1-0.pre26.3mdv2007.1
++ Revision: 145458
+- rebuild
+- Import prism2-utils
+
+* Sat Feb 12 2005 Olivier Blin <oblin@mandrakesoft.com> 0.2.1-0.pre26.2mdk
+- Patch1: do not source rpm backup files or temporary files from /etc/wlan/shared,
+  thus avoiding an endless loop (#5773)
+
+* Tue Feb 08 2005 Olivier Blin <oblin@mandrakesoft.com> 0.2.1-0.pre26.1mdk
+- 0.2.1pre26
+
+* Thu Nov 18 2004 Per Øyvind Karlsen <peroyvind@linux-mandrake.com> 0.2.1-0.pre23.1mdk
+- 0.2.1pre23
+- be sure to usr kernel source from /usr/src/linux
+- update url
+- don't wipe out buildroot in %%pre
+
+* Wed Sep 29 2004 Olivier Blin <blino@mandrake.org> 0.2.1-0.pre21.2mdk
+- Patch0: do not use prism2_cs for "I-GATE 11M PC Card / PC Card Plus"
+  (bug 11248, thanks to Leo Milano)
+
+* Wed Aug 11 2004 Laurent Culioli <laurent@mandrake.org> 0.2.1-0.pre21.1mdk
+- 0.2.1pre21
+
