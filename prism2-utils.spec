@@ -9,9 +9,11 @@
 %define distname linux-wlan-ng-%{version}
 %endif
 
+%define debug_package %{nil}
+
 Summary: 	Utilities from the linux-wlan-ng project
-Name: 		%{name}
-Version: 	%{version}
+Name: 		prism2-utils
+Version: 	0.2.8
 Release: 	%{release}
 URL:		http://www.linux-wlan.com/linux-wlan/
 Source0: 	ftp://ftp.linux-wlan.org/pub/linux-wlan-ng/%{distname}.tar.bz2
@@ -23,7 +25,6 @@ Group: 		System/Kernel and hardware
 BuildRequires: 	kernel-source-latest
 BuildRequires: 	kernel-devel
 Provides:	linux-wlan-ng
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Tools for configuring the prism2 drivers for wireless network
