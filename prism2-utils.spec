@@ -4,7 +4,7 @@
 Summary:	Utilities from the linux-wlan-ng project
 Name:		prism2-utils
 Version:	0.2.8
-Release:	7
+Release:	8
 License:	MPL
 Group:		System/Kernel and hardware
 Url:		http://www.linux-wlan.com/linux-wlan/
