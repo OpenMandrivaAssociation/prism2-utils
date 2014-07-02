@@ -1,19 +1,25 @@
-%define debug_package %{nil}
+%define pretag	0
+%if %pretag
+%define distname linux-wlan-ng-%{version}-%{pretag}
+%else
 %define distname linux-wlan-ng-%{version}
+%endif
 
-Summary:	Utilities from the linux-wlan-ng project
-Name:		prism2-utils
-Version:	0.2.8
-Release:	11
-License:	MPL
-Group:		System/Kernel and hardware
-Url:		http://www.linux-wlan.com/linux-wlan/
-Source0:	ftp://ftp.linux-wlan.org/pub/linux-wlan-ng/%{distname}.tar.bz2
-Patch0:		linux-wlan-ng-0.2.8-udev.patch
-Patch1:		linux-wlan-ng-0.2.8-rpmfiles.patch
+Summary: 	Utilities from the linux-wlan-ng project
+
+Name: 		prism2-utils
+Version: 	0.2.9
+Release: 	3
+URL:		http://www.linux-wlan.com/linux-wlan/
+Source0: 	ftp://ftp.linux-wlan.org:21/pub/linux-wlan-ng/linux-wlan-ng-%{version}.tar.bz2
+Patch0:		linux-wlan-ng-0.2.9-udev.patch
+Patch1:		linux-wlan-ng-0.2.9-rpmfiles.patch
 Patch2:		linux-wlan-ng-0.2.8-disable_kernel_driver_build.patch
-BuildRequires:	kernel-source-latest
-BuildRequires:	kernel-devel
+Patch3:		linux-wlan-ng-0.2.9-udev-typo.patch
+License: 	MPL
+Group: 		System/Kernel and hardware
+BuildRequires: 	kernel-source-latest
+BuildRequires: 	kernel-devel
 Provides:	linux-wlan-ng
 
 %description
@@ -21,8 +27,11 @@ Tools for configuring the prism2 drivers for wireless network
 cards using Intersil's Prism2/2.5/3 chipsets.
 
 %prep
-%setup -qn %{distname}
-%apply_patches
+%setup -q -n %{distname}
+%patch0 -p1 -b .udev
+%patch1 -p1 -b .rpmfiles
+%patch2 -p1 -b .disable_kernel_driver_build
+%patch3 -p1 -b .udev.typo
 
 # sed config.in for PCMCIA=n and TARGET_ROOT_ON_HOST=installdir
 sed -e 's%PRISM2_PCMCIA=y%PRISM2_PCMCIA=n%g' config.in |\
@@ -50,6 +59,7 @@ mv m etc/pcmcia/Makefile
 perl -p -i -e 's|/usr/local/man|/usr/share/man||g' man/Makefile
 
 %build
+
 # use the headers from the Mandriva kernel
 CFLAGS=-I/usr/src/linux/3rdparty/prism25/include make all
 
@@ -64,12 +74,14 @@ install -d -m755 %{buildroot}/etc/udev/rules.d
 install -m 644 etc/udev/rules.d/40-prism2.rules %{buildroot}/etc/udev/rules.d
 
 # how did this get there?
-rm -f %buildroot/etc/shared
+rm -f %{buildroot}/etc/shared
 
 %post
 # disable wlan service by default, drakconnect should enable
 # it when necessary.
 chkconfig --del wlan
+
+%clean
 
 %files
 %doc CHANGES COPYING FAQ LICENSE README THANKS TODO

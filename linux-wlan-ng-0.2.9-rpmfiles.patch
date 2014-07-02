@@ -1,7 +1,7 @@
-diff -p -up linux-wlan-ng-0.2.8/etc/wlan/shared.rpmfiles linux-wlan-ng-0.2.8/etc/wlan/shared
---- linux-wlan-ng-0.2.8/etc/wlan/shared.rpmfiles	2006-06-26 17:03:27.000000000 +0200
-+++ linux-wlan-ng-0.2.8/etc/wlan/shared	2008-03-07 09:55:11.000000000 +0100
-@@ -97,6 +97,7 @@ fi
+diff -Naur linux-wlan-ng-0.2.9.orig/etc/wlan/shared linux-wlan-ng-0.2.9/etc/wlan/shared
+--- linux-wlan-ng-0.2.9.orig/etc/wlan/shared	2014-06-09 22:41:18.000000000 +0400
++++ linux-wlan-ng-0.2.9/etc/wlan/shared	2014-06-09 22:41:18.000000000 +0400
+@@ -100,6 +100,7 @@
  # Debian mod. If there is shared.dpkg-old we get a endless loop
  if [ "`ls /etc/wlan/shared.* 2>/dev/null`" ]; then
  	for i in `find /etc/wlan -name 'shared.*' -and -not -name '*.dpkg*'` ; do 

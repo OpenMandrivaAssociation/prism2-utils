@@ -1,2 +1,4 @@
+removed_sources:
+  linux-wlan-ng-0.2.8.tar.bz2: a98cd5c7327f5392730ebe1a5b7f289fc88d00de
 sources:
-  "linux-wlan-ng-0.2.8.tar.bz2": a98cd5c7327f5392730ebe1a5b7f289fc88d00de
+  linux-wlan-ng-0.2.9.tar.bz2: e6b8e37bbe3b6d2d17dea5d8db782cad7f84a64e
