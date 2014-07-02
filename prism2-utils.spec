@@ -5,8 +5,9 @@
 %define distname linux-wlan-ng-%{version}
 %endif
 
-Summary: 	Utilities from the linux-wlan-ng project
+%define debug_package %{nil}
 
+Summary: 	Utilities from the linux-wlan-ng project
 Name: 		prism2-utils
 Version: 	0.2.9
 Release: 	3
