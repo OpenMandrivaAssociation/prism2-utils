@@ -19,7 +19,7 @@ Patch2:		linux-wlan-ng-0.2.8-disable_kernel_driver_build.patch
 Patch3:		linux-wlan-ng-0.2.9-udev-typo.patch
 License: 	MPL
 Group: 		System/Kernel and hardware
-BuildRequires: 	kernel-source-latest
+BuildRequires: 	kernel-source
 BuildRequires: 	kernel-devel
 Provides:	linux-wlan-ng
 
