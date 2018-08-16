@@ -7,20 +7,20 @@
 
 %define debug_package %{nil}
 
-Summary: 	Utilities from the linux-wlan-ng project
-Name: 		prism2-utils
-Version: 	0.2.9
-Release: 	9
+Summary:	Utilities from the linux-wlan-ng project
+Name:		prism2-utils
+Version:	0.2.9
+Release:	10
 URL:		http://www.linux-wlan.com/linux-wlan/
-Source0: 	ftp://ftp.linux-wlan.org:21/pub/linux-wlan-ng/linux-wlan-ng-%{version}.tar.bz2
+Source0:	ftp://ftp.linux-wlan.org:21/pub/linux-wlan-ng/linux-wlan-ng-%{version}.tar.bz2
 Patch0:		linux-wlan-ng-0.2.9-udev.patch
 Patch1:		linux-wlan-ng-0.2.9-rpmfiles.patch
 Patch2:		linux-wlan-ng-0.2.8-disable_kernel_driver_build.patch
 Patch3:		linux-wlan-ng-0.2.9-udev-typo.patch
-License: 	MPL
-Group: 		System/Kernel and hardware
-BuildRequires: 	kernel-source
-BuildRequires: 	kernel-devel
+License:	MPL
+Group:		System/Kernel and hardware
+BuildRequires:	kernel-source
+BuildRequires:	kernel-devel
 Provides:	linux-wlan-ng
 
 %description
@@ -77,18 +77,16 @@ install -m 644 etc/udev/rules.d/40-prism2.rules %{buildroot}/etc/udev/rules.d
 # how did this get there?
 rm -f %{buildroot}/etc/shared
 
+rm -rf %{buildroot}%{_initrddir}/wlan
 %post
 # disable wlan service by default, drakconnect should enable
 # it when necessary.
 chkconfig --del wlan
 
-%clean
-
 %files
 %doc CHANGES COPYING FAQ LICENSE README THANKS TODO
 %{_mandir}/man1/*
 /sbin/*
-%{_initrddir}/wlan
 %{_sysconfdir}/wlan/shared
 %config(noreplace) %{_sysconfdir}/pcmcia/wlan-ng
 %config(noreplace) %{_sysconfdir}/pcmcia/wlan-ng.conf
