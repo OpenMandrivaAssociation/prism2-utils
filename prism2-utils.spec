@@ -77,7 +77,8 @@ install -m 644 etc/udev/rules.d/40-prism2.rules %{buildroot}/etc/udev/rules.d
 # how did this get there?
 rm -f %{buildroot}/etc/shared
 
-rm -rf %{buildroot}%{_initrddir}/wlan
+rm -rf %{buildroot}%{_initrddir}
+
 %post
 # disable wlan service by default, drakconnect should enable
 # it when necessary.
