@@ -10,7 +10,7 @@
 Summary:	Utilities from the linux-wlan-ng project
 Name:		prism2-utils
 Version:	0.2.9
-Release:	11
+Release:	12
 URL:		http://www.linux-wlan.com/linux-wlan/
 Source0:	ftp://ftp.linux-wlan.org:21/pub/linux-wlan-ng/linux-wlan-ng-%{version}.tar.bz2
 Patch0:		linux-wlan-ng-0.2.9-udev.patch
