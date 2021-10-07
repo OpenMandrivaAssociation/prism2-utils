@@ -1,3 +1,6 @@
+# Work around incomplete debug packages
+%global _empty_manifest_terminate_build 0
+
 %define pretag	0
 %if %pretag
 %define distname linux-wlan-ng-%{version}-%{pretag}
