@@ -1,7 +1,0 @@
-diff -Naur linux-wlan-ng-0.2.9.orig/etc/udev/rules.d/40-prism2.rules linux-wlan-ng-0.2.9/etc/udev/rules.d/40-prism2.rules
---- linux-wlan-ng-0.2.9.orig/etc/udev/rules.d/40-prism2.rules	2014-07-02 14:20:52.146544528 +0400
-+++ linux-wlan-ng-0.2.9/etc/udev/rules.d/40-prism2.rules	2014-07-02 14:21:11.425544041 +0400
-@@ -1,2 +1,2 @@
- #ACTION=="add",BUS=="usb",DRIVER=="prism2_usb" ,RUN+="/etc/wlan/wlan-udev.sh %k"
--KERNEL="wlan*",ACTION=="add",DRIVERS=="prism2_usb" ,RUN+="/etc/wlan/wlan-udev.sh %k"
-+KERNEL=="wlan*",ACTION=="add",DRIVERS=="prism2_usb" ,RUN+="/etc/wlan/wlan-udev.sh %k"
